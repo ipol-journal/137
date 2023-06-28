@@ -1,0 +1,47 @@
+# -*- makefile -*-
+# Copyright 2014 Nicolas Limare <nicolas.limare@cmla.ens-cachan.fr>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+# Intel MKL
+# link with libmkl_core.so and others
+ifeq ($(WITH_BLAS), mkl)
+BLAS		= mkl
+ifndef MKLROOT
+$(error "MKLROOT must be defined to use the MKL libraries.")
+endif
+LDFLAGS		+= -L$(MKLROOT)/lib/intel64 \
+                   -lmkl_gf_lp64 -lmkl_core -lpthread \
+		   -lmkl_gnu_thread
+endif
+
+# OpenBLAS
+# link with libopenblas.so
+ifeq ($(WITH_BLAS), open)
+BLAS		= open
+LDFLAGS		+= -lopenblas
+endif
+
+# Atlas
+# link with libcblas.so libatlas.so
+ifeq ($(WITH_BLAS), atlas)
+BLAS		= atlas
+LDFLAGS		+= -lcblas -latlas
+endif
+
+# GSL
+# link with libgslcblas.so
+ifeq ($(WITH_BLAS), gsl)
+BLAS		= gsl
+LDFLAGS		+= -lgslcblas
+endif
+
+# Fallback to generic BLAS
+# link with libblas.so
+ifndef BLAS
+BLAS		= generic
+LDFLAGS		+= -lblas
+endif

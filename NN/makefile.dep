@@ -1,0 +1,19 @@
+# DO NOT DELETE
+
+Autoencoder.o: global.hpp timing.h NeuralStruct.hpp imageio.hpp eigen.hpp
+Autoencoder.o: matops.hpp Autoencoder.hpp
+WStruct.o: WStruct.hpp global.hpp timing.h
+NeuralStruct.o: NeuralStruct.hpp global.hpp timing.h
+build.o: global.hpp timing.h imageio.hpp eigen.hpp Autoencoder.hpp
+build.o: NeuralStruct.hpp WStruct.hpp matops.hpp build.hpp
+check_gradient.o: global.hpp timing.h Autoencoder.hpp eigen.hpp prng.hpp
+check_gradient.o: check_gradient.hpp
+demosaick.o: global.hpp timing.h appl.hpp Autoencoder.hpp eigen.hpp
+demosaick.o: NeuralStruct.hpp
+global.o: global.hpp timing.h
+imageio.o: global.hpp timing.h io_png.h prng.hpp imageio.hpp eigen.hpp
+io_png.o: io_png.h
+matops.o: global.hpp timing.h prng.hpp tanh.hpp matops.hpp
+timing.o: timing.h
+train.o: global.hpp timing.h build.hpp Autoencoder.hpp eigen.hpp
+train.o: check_gradient.hpp
