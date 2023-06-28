@@ -82,8 +82,8 @@ distclean: clean
 
 # install Eigen library locally
 EIGEN_DIR	= eigen3
-EIGEN_TGZ	= eigen-3.2.2.tar.gz
-EIGEN_URL	= http://bitbucket.org/eigen/eigen/get/3.2.2.tar.gz
+EIGEN_TGZ	= eigen-3.2.10.tar.gz
+EIGEN_URL	= https://ipolcore.ipol.im/static/jyotsna/eigen-3.2.10.tar.gz
 
 eigen: $(EIGEN_DIR)
 $(EIGEN_TGZ):

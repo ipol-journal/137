@@ -11,7 +11,7 @@ ap.add_argument("pattern", type=int)
 args = ap.parse_args()
 
 # Demosaic image
-subprocess.run(['demosaick', '-p', str(args.pattern), '-c', 'input_0_sel.png'])
+subprocess.run(['demosaick', '-p', str(args.pattern), '-c', 'input_0.png'])
 subprocess.run(['dmbilinear', '-p', str(args.pattern), 'mosaiced.png', 'bilinear.png'])
 subprocess.run(['dmzhangwu', '-p', str(args.pattern), 'mosaiced.png', 'zhangwu.png'])
 
