@@ -47,6 +47,6 @@ zoomfactor = max(1, int(math.ceil(200.0/min(sizeX, sizeY))))
 for filename in ['input_0', 'mosaiced', 'demosaiced', 'bilinear', 'diffdemosaiced', 'diffbilinear', 'ccropped',
     'zhangwu', 'diffzhangwu']:
     im = PIL.Image.open(filename + '.png')
-    im.resize((sizeX, sizeY), method='nearest')
+    im.resize((sizeX, sizeY))
     im.save(filename + '_zoom.png')
    
