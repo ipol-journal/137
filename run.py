@@ -16,7 +16,7 @@ subprocess.run(['dmbilinear', '-p', str(args.pattern), 'mosaiced.png', 'bilinear
 subprocess.run(['dmzhangwu', '-p', str(args.pattern), 'mosaiced.png', 'zhangwu.png'])
 
 # crop images
-files = ['bilinear', 'mosaiced.png', 'zhangwu.png']
+files = ['bilinear', 'mosaiced', 'zhangwu']
 for filename in files:
     im = PIL.Image.open(filename + '.png')
     (sx, sy) = im.size
