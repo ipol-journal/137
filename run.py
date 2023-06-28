@@ -43,16 +43,16 @@ with open('rmse_zhangwu.txt', 'w') as stdout:
 (sizeX, sizeY) = PIL.Image.open('input_0.png').size
 zoomfactor = max(1, int(math.ceil(200.0/min(sizeX, sizeY))))
 
+files = ['input_0', 'mosaiced', 'demosaiced', 'bilinear', 'diffdemosaiced', 'diffbilinear', 'ccropped', 'zhangwu', 'diffzhangwu']
+
 if zoomfactor > 1:
     #write zoomfactor=True in algo_info.txt
     with open('algo_info.txt', 'w') as file:
         file.write("zoomfactor=1")
     (sizeX, sizeY) = (zoomfactor*sizeX, zoomfactor*sizeY)
-
-    for filename in ['input_0', 'mosaiced', 'demosaiced', 'bilinear', 'diffdemosaiced', 'diffbilinear', 'ccropped',
-        'zhangwu', 'diffzhangwu']:
+    for filename in files:
         im = PIL.Image.open(filename + '.png')
-        im.resize((sizeX, sizeY))
+        im = im.resize((sizeX, sizeY))
         im.save(filename + '_zoom.png')
 
 else:
