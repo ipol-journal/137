@@ -39,6 +39,12 @@ with open('rmse_bilinear.txt', 'w') as stdout:
 with open('rmse_zhangwu.txt', 'w') as stdout:
     subprocess.run(['imdiff', '-mrmse', 'ccropped.png', 'zhangwu.png'], stdout=stdout, stderr=stdout),
 
+# Read the rmse_*.txt files
+for m in ['nn', 'bilinear', 'zhangwu']:
+    with open('rmse_' + m + '.txt', 'r') as input, open("algo_info.txt", "a") as output:
+        value = format(float(input.read()), ".2f")
+        output.write(f'rmse_{m}={value}\n')
+
 # Resize for visualization (new size of the smallest dimension = 200)
 (sizeX, sizeY) = PIL.Image.open('input_0.png').size
 zoomfactor = max(1, int(math.ceil(200.0/min(sizeX, sizeY))))
@@ -47,7 +53,7 @@ files = ['input_0', 'mosaiced', 'demosaiced', 'bilinear', 'diffdemosaiced', 'dif
 
 if zoomfactor > 1:
     #write zoomfactor=True in algo_info.txt
-    with open('algo_info.txt', 'w') as file:
+    with open('algo_info.txt', 'a') as file:
         file.write("zoomfactor=1")
     (sizeX, sizeY) = (zoomfactor*sizeX, zoomfactor*sizeY)
     for filename in files:
@@ -57,6 +63,6 @@ if zoomfactor > 1:
 
 else:
     #write nozoomfactor=True in algo_info.txt
-    with open('algo_info.txt', 'w') as file:
+    with open('algo_info.txt', 'a') as file:
         file.write("nozoomfactor=1")
    
