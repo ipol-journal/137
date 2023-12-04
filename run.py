@@ -7,13 +7,15 @@ import math
 
 # parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("pattern", type=int)
+ap.add_argument("pattern", type=str)
 args = ap.parse_args()
 
+patternum = {'RGGB': '0', 'GRBG': '1', 'BGGR': '2', 'GBRG': '3'}
+
 # Demosaic image
-subprocess.run(['demosaick', '-p', str(args.pattern), '-c', 'input_0.png'])
-subprocess.run(['dmbilinear', '-p', str(args.pattern), 'mosaiced.png', 'bilinear.png'])
-subprocess.run(['dmzhangwu', '-p', str(args.pattern), 'mosaiced.png', 'zhangwu.png'])
+subprocess.run(['demosaick', '-p', str(patternum[args.pattern]), '-c', 'input_0.png'])
+subprocess.run(['dmbilinear', '-p', args.pattern, 'mosaiced.png', 'bilinear.png'])
+subprocess.run(['dmzhangwu', '-p', args.pattern, 'mosaiced.png', 'zhangwu.png'])
 
 # crop images
 files = ['bilinear', 'mosaiced', 'zhangwu']
